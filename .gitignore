@@ -1,5 +1,7 @@
 # ignore all files in any directory ending in _env
 *_env/
+
 *pycache*/
 .vscode/*
 blog_proj.code-workspace
+blog_proj/settings.py
