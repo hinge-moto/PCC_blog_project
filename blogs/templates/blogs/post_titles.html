@@ -2,11 +2,16 @@
 
 {% block content %}
 
-    <p>Blog Posts</p>
+    <p><b>Blog Posts</b></p>
+
+    <a href="{% url 'blogs:new_post' %}">Add a new post</a>
 
     <ul>
         {% for title in titles %}
-            <li>{{ title }}</li>
+            <li>
+                <a href="{% url 'blogs:post' title.id %}">{{ title }}</a>
+            </li>
+            <p>{{ title.date_added|date:'M d, Y H:i' }}</p>
         {% empty %}
             <li>No posts have been added yet!</li>
         {% endfor %}

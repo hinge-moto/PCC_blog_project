@@ -1,0 +1,11 @@
+{% extends "blogs/base.html" %}
+
+{% block content %}
+
+    <p><strong>{{ title }}</strong></p>
+
+    <p>{{ post|linebreaks }}</p>
+    <p>
+        <a href="{% url 'blogs:edit_post' title.id %}">Edit post</a>
+    </p>
+{% endblock content %}
