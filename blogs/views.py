@@ -1,4 +1,5 @@
 from django.shortcuts import render, redirect
+from django.contrib.auth.decorators import login_required
 
 from .models import BlogPost
 from .forms import PostForm
@@ -11,7 +12,7 @@ def index(request):
 
 def post_titles(request):
     """Show all blog post titles."""
-    titles = BlogPost.objects.order_by('date_added')
+    titles = BlogPost.objects.filter(owner=request.user).order_by('date_added')
     context = {'titles': titles}
     return render(request, 'blogs/post_titles.html', context)
 
@@ -24,6 +25,7 @@ def post(request, post_id):
     return render(request, 'blogs/post.html', context)
 
 
+@login_required
 def new_post(request):
     """Add a new post."""
     if request.method != 'POST':
@@ -41,6 +43,7 @@ def new_post(request):
     return render(request, 'blogs/new_post.html', context)
 
 
+@login_required
 def edit_post(request, post_id):
     """Edit a post."""
     post = BlogPost.objects.get(id=post_id)
